@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src='http://code.jquery.com/jquery-3.3.1.min.js'></script>
+    <script src='http://worldofdatascience.com/kedion.min.js'></script>
+</head>
+
+<body>
+</body>
+
+</html>
+
+<script>
+    load_fonts({
+        "font": "Titillium+Web"
+    })
+
+    add_top_button({
+        "this_class": "to_top_button",
+        "text": "TOP",
+        "side": "right"
+    })
+
+    style_body({
+        "background": "#dedede",
+        "font-family": "Titillium Web",
+        "min-width": "1250px",
+        "max-width": "2000px"
+    })
+
+    add_navigation_bar({
+        "this_class": "my_nav"
+    })
+
+    add_layout('my_nav', 1, {
+        "this_class": "nav_stuff",
+        "number_of_rows": 1,
+        "number_of_columns": 2,
+        "row_class": "nav_stuff_rows",
+        "cell_class": "nav_stuff_cells"
+    })
+
+    style_layout('nav_stuff', 1, {
+        "height": "90px",
+        "column_widths": ['50%', '50%'],
+        "border": 0
+    })
+
+    add_image('nav_stuff_cells', 1, {
+        "this_class": "my_logo",
+        "image_path": "http://bit.ly/2HKkvyF"
+    })
+
+    style_image('my_logo', 1, {
+        "width": "70px",
+        "float": "left"
+    })
+
+    add_text('nav_stuff_cells', 1, {
+        "this_class": "my_title",
+        "text": "FLOWER POWER"
+    })
+
+    style_text('my_title', 1, {
+        "font-size": "30px",
+        "margin-left": "80px",
+        "margin-top": "10px"
+    })
+
+    add_button('nav_stuff_cells', 2, {
+        "this_class": "my_nav_buttons",
+        "text": "TRAINING"
+    })
+
+    add_button('nav_stuff_cells', 2, {
+        "this_class": "my_nav_buttons",
+        "text": "CHALLENGE"
+    })
+
+    add_button('nav_stuff_cells', 2, {
+        "this_class": "my_nav_buttons",
+        "text": "SCOREBOARD"
+    })
+
+    style_layout('nav_stuff_cells', 2, {
+        "halign": "right"
+    })
+
+    add_spa({
+        "this_class": "my_sections",
+        "sections": 3
+    })
+
+    style_spa('my_sections', 1, {
+        "background": "skyblue",
+        "height": "500px"
+    })
+
+    style_spa('my_sections', 2, {
+        "background": "white",
+        "height": "550px"
+    })
+    style_spa('my_sections', 3, {
+        "background": "steelblue",
+        "height": "500px"
+    })
+
+    add_event('my_nav_buttons', 1, {
+        "type": "click",
+        "function": "scroll_to('my_sections', 1, {'speed' : 500})"
+    })
+
+    add_event('my_nav_buttons', 2, {
+        "type": "click",
+        "function": "scroll_to('my_sections', 2, {'speed' : 500})"
+    })
+
+    add_event('my_nav_buttons', 3, {
+        "type": "click",
+        "function": "scroll_to('my_sections', 3, {'speed' : 500})"
+    })
+
+    // ********* SECTION 1
+
+    add_text("my_sections", 1, {
+        "this_class": "title_1",
+        "text": "TRAIN YOURSELF"
+    })
+
+    style_text("title_1", 1, {
+        "font-size": "24px",
+        "font-weight": "bold",
+        "align": "center"
+    })
+
+    add_layout("my_sections", 1, {
+        "this_class": "layout_trainer",
+        "row_class": "layout_trainer_rows",
+        "cell_class": "layout_trainer_cells",
+        "number_of_rows": 2,
+        "number_of_columns": 2
+    })
+
+    style_layout("layout_trainer", 1, {
+        "column_widths": ['40%', '60%'],
+        "height": "400px",
+        "width": "900px",
+        "margin-top": "40px",
+        "align": "center",
+        "border": 0
+    })
+
+    style_layout("layout_trainer_rows", 1, {
+        "height": "60px",
+    })
+
+    add_button("layout_trainer_cells", 1, {
+        "this_class": "show_button",
+        "text": "SHOW IRIS"
+    })
+
+    style_button("show_button", 1, {
+        "background": "hotpink",
+        "align": "center"
+    })
+
+    add_event("show_button", 1, {
+        "type": "click",
+        "function": "fetch_random_iris()"
+    })
+
+    function fetch_random_iris() {
+
+        call_api({
+            "url": "http://worldofdatascience.com:9090/get_random_flower",
+            "parameters": "{}",
+            "done": "show_fetched_results(data)"
+        })
+
+        animate_element("show_button", 1, {
+            "type": "spin",
+            "iterations": 1,
+            "speed": 700
+        })
+
+    }
+
+    function show_fetched_results(data) {
+
+        remove_element("iris_image", 1)
+
+        add_image("layout_trainer_cells", 3, {
+            "this_class": "iris_image",
+            "image_path": data['url']
+        })
+
+        style_image("iris_image", 1, {
+            "align": "center",
+            "width": "315px",
+            "height": "315px"
+        })
+
+        remove_element("flower_title", 1)
+
+        add_text("layout_trainer_cells", 2, {
+            "this_class": "flower_title",
+            "text": "Iris " + data['name'],
+        })
+
+        style_text("flower_title", 1, {
+            "align": "center",
+            "color": "black",
+            "font-weight": "bold",
+            "font-size": "20px"
+        })
+
+        remove_element("iris_barchart_1", 1)
+
+        add_visual("layout_trainer_cells", 4, {
+            "this_class": "iris_barchart_1",
+            "type": "bar_chart",
+            "width": "500px",
+            "height": "300px",
+            "data": data['data'],
+            "series_title": "VALUE",
+            "data_color": '#33AADE',
+            "x_tick_size": "14px",
+            "y_tick_size": "17px",
+            "y_axis_title": "centimeters",
+            "x_axis_title": "measurement",
+            "y_title_size": "20px",
+            "x_title_size": "18px"
+        })
+
+        style_visual('iris_barchart_1', 1, {
+            "align": "center",
+            "background": "white",
+            "padding": "10px"
+        })
+
+    }
+    // ********* SECTION 2
+
+    add_text("my_sections", 2, {
+        "this_class": "title_1",
+        "text": "CHALLENGE THE AI"
+    })
+
+    style_text("title_1", 2, {
+        "font-size": "24px",
+        "font-weight": "bold",
+        "margin-left": "20px",
+        "align": "center"
+    })
+
+    add_layout("my_sections", 2, {
+        "this_class": "layout_challenge",
+        "row_class": "layout_challenge_rows",
+        "cell_class": "layout_challenge_cells",
+        "number_of_rows": 3,
+        "number_of_columns": 3
+    })
+
+    style_layout("layout_challenge", 1, {
+        "column_widths": ['30%', '45%', '15%'],
+        "height": "480px",
+        "width": "1100px",
+        "align": "center",
+        "margin-top": "40px",
+        "border": 0
+    })
+
+    style_layout("layout_challenge_rows", 1, {
+        "height": "60px",
+    })
+
+    add_button("layout_challenge_cells", 1, {
+        "this_class": "show_button",
+        "text": "SHOW IRIS"
+    })
+
+    style_button("show_button", 2, {
+        "background": "hotpink",
+        "align": "center"
+    })
+
+    add_event("show_button", 2, {
+        "type": "click",
+        "function": "fetch_random_iris_b()"
+    })
+
+    add_text("layout_challenge_cells", 3, {
+        "this_class": "guess_text",
+        "text": "Make a Guess!",
+    })
+
+    style_text("guess_text", 1, {
+        "align": "center",
+        "color": "black",
+        "font-weight": "bold",
+        "font-size": "20px"
+    })
+
+    add_icon('layout_challenge_cells', 6, {
+        "this_class": "user",
+        "icon_class": "fa-user"
+    })
+
+    style_icon('user', 1, {
+        "align": "center",
+        "font-size": "30px"
+    })
+
+    add_dropdown('layout_challenge_cells', 6, {
+        "this_class": "choose_flower",
+        "options": ['Iris setosa', 'Iris virginica', 'Iris versicolor'],
+        "title": "choose flower..."
+    })
+
+    style_dropdown('choose_flower', 1, {
+        "align": "center",
+        "margin-top": "4px"
+    })
+
+    style_layout("layout_challenge_cells", 6, {
+        "vertical-align": "top",
+    })
+
+    add_icon('layout_challenge_cells', 6, {
+        "this_class": "gears",
+        "icon_class": "fa-cogs"
+    })
+
+    style_icon('gears', 1, {
+        "align": "center",
+        "font-size": "30px",
+        "margin-top": "30px",
+        "margin-bottom": "10px"
+    })
+
+    add_button('layout_challenge_cells', 6, {
+        "this_class": "prediction_button",
+        "text": "ASK MACHINE"
+    })
+
+    style_button('prediction_button', 1, {
+        "align": "center",
+        "background": "hotpink",
+        "width": "150px"
+    })
+
+    add_event('prediction_button', 1, {
+        "type": "click",
+        "function": "predict_flower()"
+    })
+
+
+
+
+    add_text("layout_challenge_cells", 7, {
+        "this_class": "who_text",
+        "text": "USER GUESS:",
+    })
+    add_text("layout_challenge_cells", 8, {
+        "this_class": "who_text",
+        "text": "AI GUESS:",
+    })
+    add_text("layout_challenge_cells", 9, {
+        "this_class": "who_text",
+        "text": "ACTUAL:",
+    })
+
+    all_style_text('who_text', {
+        "font-weight": "bold",
+        "align": "center"
+    })
+
+    style_layout('layout_challenge_cells', 7, {
+        "vertical-align": "top"
+    })
+    style_layout('layout_challenge_cells', 8, {
+        "vertical-align": "top"
+    })
+    style_layout('layout_challenge_cells', 9, {
+        "vertical-align": "top"
+    })
+
+
+    add_event('choose_flower', 1, {
+        "type": "change",
+        "function": "show_user_choice()"
+    })
+
+    add_text('layout_challenge_cells', 6, {
+        "this_class": "question_mark",
+        "text": "?"
+    })
+    style_text('question_mark', 1, {
+        "align": "center",
+        "margin-top": "20px",
+        "font-size": "30px"
+    })
+
+    add_button('layout_challenge_cells', 6, {
+        "this_class": "show_result_button",
+        "text": "SHOW ACTUAL"
+    })
+
+    style_button('show_result_button', 1, {
+        "align": "center",
+        "background": "grey",
+        "width": "150px"
+    })
+
+    add_event('show_result_button', 1, {
+        "type": "click",
+        "function": "reveal_actual()"
+    })
+
+    // ********* SECTION 3
+
+    add_text("my_sections", 3, {
+        "this_class": "title_1",
+        "text": "SCOREBOARD"
+    })
+
+    style_text("title_1", 3, {
+        "font-size": "24px",
+        "font-weight": "bold",
+        "margin-left": "20px",
+        "align": "center",
+        "color": "white"
+    })
+
+
+    //****** SPECIAL FUNCTIONS
+
+    function show_fetched_results(data) {
+
+        remove_element("iris_image", 1)
+
+        add_image("layout_trainer_cells", 3, {
+            "this_class": "iris_image",
+            "image_path": data['url']
+        })
+
+        style_image("iris_image", 1, {
+            "align": "center",
+            "width": "315px",
+            "height": "315px"
+        })
+
+        remove_element("flower_title", 1)
+
+        add_text("layout_trainer_cells", 2, {
+            "this_class": "flower_title",
+            "text": "Iris " + data['name'],
+        })
+
+        style_text("flower_title", 1, {
+            "align": "center",
+            "color": "black",
+            "font-weight": "bold",
+            "font-size": "20px"
+        })
+
+        remove_element("iris_barchart_1", 1)
+
+        add_visual("layout_trainer_cells", 4, {
+            "this_class": "iris_barchart_1",
+            "type": "bar_chart",
+            "width": "500px",
+            "height": "300px",
+            "data": data['data'],
+            "series_title": "VALUE",
+            "data_color": '#33AADE',
+            "x_tick_size": "14px",
+            "y_tick_size": "17px",
+            "y_axis_title": "centimeters",
+            "x_axis_title": "measurement",
+            "y_title_size": "20px",
+            "x_title_size": "18px"
+        })
+
+        style_visual('iris_barchart_1', 1, {
+            "align": "center",
+            "background": "white",
+            "padding": "10px"
+        })
+
+    }
+
+    function fetch_random_iris() {
+        call_api({
+            "url": "http://138.197.106.104:9090/get_random_flower",
+            "parameters": "{}",
+            "done": "show_fetched_results(data)"
+        })
+
+        animate_element("show_button", 1, {
+            "type": "spin",
+            "iterations": 1,
+            "speed": 700
+        })
+
+    }
+
+
+    function show_fetched_results_b(data) {
+
+        add_value('choose_flower', 1, {
+            'value': 'choose flower...'
+        })
+
+        remove_element("iris_image_2", 1)
+
+        add_image("layout_challenge_cells", 4, {
+            "this_class": "iris_image_2",
+            "image_path": data['url']
+        })
+
+        style_image("iris_image_2", 1, {
+            "align": "center",
+            "width": "315px",
+            "height": "315px",
+            "invert": "invert(100%)"
+        })
+
+        remove_element("flower_title_2", 1)
+
+        add_text("layout_challenge_cells", 2, {
+            "this_class": "flower_title_2",
+            "text": "Iris ???",
+        })
+
+        style_text("flower_title_2", 1, {
+            "align": "center",
+            "color": "black",
+            "font-weight": "bold",
+            "font-size": "20px"
+        })
+
+        remove_element("iris_barchart_2", 1)
+
+        add_visual("layout_challenge_cells", 5, {
+            "this_class": "iris_barchart_2",
+            "type": "bar_chart",
+            "width": "450px",
+            "height": "290px",
+            "data": data['data'],
+            "series_title": "VALUE",
+            "data_color": '#33AADE',
+            "x_tick_size": "14px",
+            "y_tick_size": "17px",
+            "y_axis_title": "centimeters",
+            "x_axis_title": "measurement",
+            "y_title_size": "20px",
+            "x_title_size": "18px"
+        })
+
+        style_visual('iris_barchart_2', 1, {
+            "align": "center",
+            "background": "white",
+            "padding": "10px"
+        })
+
+        store_data('prediction_button', 1, {
+            "key": 'hold_measurements',
+            "value": data['data']['values']
+        })
+
+        remove_element('user_choice', 1)
+        remove_element('actual_flower', 1)
+        remove_element('pred_results', 1)
+
+
+        style_button('show_result_button', 1, {
+            "pointer-events": "auto",
+            "opacity": 1
+        })
+
+        add_text('layout_challenge_cells', 9, {
+            "this_class": "actual_flower",
+            "text": "Iris " + data['name']
+        })
+
+        style_text('actual_flower', 1, {
+            "visibility": "hidden",
+            "align": "center",
+            "color": "hotpink"
+        })
+
+    }
+
+    function fetch_random_iris_b() {
+        call_api({
+            "url": "http://138.197.106.104:9090/get_random_flower",
+            "parameters": "{}",
+            "done": "show_fetched_results_b(data)"
+        })
+
+        animate_element("show_button", 2, {
+            "type": "spin",
+            "iterations": 1,
+            "speed": 700
+        })
+
+        remove_element('arrow_right', 1)
+        remove_element('arrow_text', 1)
+
+    }
+
+    function show_prediction(data) {
+
+        remove_element("pred_results", 1)
+
+        add_text('layout_challenge_cells', 8, {
+            "this_class": "pred_results",
+            "text": data
+        })
+
+        style_text('pred_results', 1, {
+            "align": "center",
+            "color": "hotpink"
+        })
+
+
+    }
+
+    function predict_flower() {
+
+        guess_data = fetch_data('prediction_button', 1, {
+            'key': 'hold_measurements'
+        })
+
+        call_api({
+            "url": "http://138.197.106.104:9090/predict_flower",
+            "parameters": '{ "guess_string" : "' + guess_data + '"}',
+            "done": "show_prediction(data)",
+            "fail": "alert(JSON.stringify(error))"
+        })
+
+        animate_element("prediction_button", 1, {
+            "type": "spin",
+            "iterations": 1,
+            "speed": 700
+        })
+
+    }
+
+    function show_user_choice() {
+
+        remove_element("user_choice", 1)
+
+        add_text('layout_challenge_cells', 7, {
+            "this_class": "user_choice",
+            "text": listen_for_value('choose_flower', 1)
+        })
+
+        style_text('user_choice', 1, {
+            "align": "center",
+            "color": "hotpink"
+        })
+
+    }
+
+    function reveal_actual() {
+
+        style_text('actual_flower', 1, {
+            "visibility": "visible"
+        })
+
+        animate_element("show_result_button", 1, {
+            "type": "rubberBand",
+            "iterations": 1,
+            "speed": 700
+        })
+
+        style_button('show_result_button', 1, {
+            "pointer-events": "none",
+            "opacity": 0.3
+        })
+
+        scoreboard();
+
+        try_again();
+
+    }
+
+    user_score = 0;
+    ai_score = 0;
+
+    function scoreboard() {
+
+        user_choice = listen_for_value('user_choice', 1)
+        ai_choice = listen_for_value('pred_results', 1)
+        actual_choice = listen_for_value('actual_flower', 1)
+
+        if (user_choice == actual_choice) {
+            user_score++;
+        }
+        if (ai_choice == actual_choice) {
+            ai_score++;
+        }
+
+        remove_element('iris_barchart_3', 1)
+
+        add_visual("my_sections", 3, {
+            "this_class": "iris_barchart_3",
+            "type": "horizontal_bar_chart",
+            "width": "90%",
+            "height": "80%",
+            "data": {
+                "keys": ['USER', 'AI'],
+                "values": [user_score, ai_score]
+            },
+            "series_title": "VALUE",
+            "data_color": '#dde8f1',
+            "x_tick_size": "14px",
+            "y_tick_size": "17px",
+            "y_axis_title": "",
+            "x_axis_title": "SCORE",
+            "y_title_size": "20px",
+            "x_title_size": "18px",
+            "x_font_color": "white",
+            "y_font_color": "white",
+            "x_step_size": 1
+        })
+
+        style_visual('iris_barchart_3', 1, {
+            "background": "steelblue",
+            "margin-top": "50px",
+            "align": "center",
+            "border": 0
+        })
+
+
+    }
+
+    function try_again() {
+        remove_element('arrow_text', 1)
+        add_text('layout_challenge_cells', 1, {
+            "this_class": "arrow_text",
+            "text": "TRY AGAIN!!!"
+        })
+        style_text('arrow_text', 1, {
+            "position": "absolute",
+            "font-size": "18px",
+            "margin-top": "-35px",
+            "margin-left": "-27px"
+        })
+        remove_element('arrow_right', 1)
+        add_icon('layout_challenge_cells', 1, {
+            "this_class": "arrow_right",
+            "icon_class": "fa-long-arrow-right"
+        })
+        style_icon('arrow_right', 1, {
+            "font-size": "40px",
+            "position": "absolute",
+            "margin-top": "-40px",
+            "margin-left": "80px"
+        })
+        animate_element('arrow_right', 1, {
+            "type": "zoomIn",
+            "iterations": "infinite"
+        })
+    }
+
+    // show iris on page load
+    fetch_random_iris()
+    fetch_random_iris_b()
+
+    // mobile
+    if (check_for_mobile()) {
+        style_button('prediction_button', 1, {
+            "font-size": "14px"
+        })
+        style_button('show_result_button', 1, {
+            "font-size": "14px"
+        })
+    }
+</script>
