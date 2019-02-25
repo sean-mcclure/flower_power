@@ -1,149 +1,144 @@
 az.add_wrapped_function({
-        "name": "fetch_random_iris",
-        "function": function fetch_random_iris(call_function) {
-            params = {}
-            az.call_api({
-                "url": "http://localhost:9090/get_random_flower",
-                "parameters": params,
-                "done": call_function
-            })
-            az.animate_element("show_button", 1, {
-                "type": "spin",
-                "iterations": 1,
-                "speed": 700
-            })
-        }
-    })
-
+    "name": "fetch_random_iris",
+    "function": function fetch_random_iris(call_function) {
+        params = {}
+        az.call_api({
+            "url": "http://localhost:9090/get_random_flower",
+            "parameters": params,
+            "done": call_function
+        })
+        az.animate_element("show_button", 1, {
+            "type": "spin",
+            "iterations": 1,
+            "speed": 700
+        })
+    }
+})
 az.add_wrapped_function({
-        "name": "show_fetched_results",
-        "function": function show_fetched_results(data) {
-            az.animate_element('show_iris', 1, {
-                "type": "spin"
-            })
-            az.remove_element("iris_image", 1)
-            az.add_image("training_layout_cells", 1, {
-                "this_class": "iris_image",
-                "image_path": data['url']
-            })
-            az.style_image("iris_image", 1, {
-                "align": "center",
-                "width": "315px",
-                "height": "315px",
-                "border": "1px solid black",
-                "border-radius": "4px"
-            })
-            az.remove_element("flower_title", 1)
-            az.add_text("training_layout_cells", 1, {
-                "this_class": "flower_title",
-                "text": "Iris " + data['name'],
-            })
-            az.style_text("flower_title", 1, {
-                "align": "center",
-                "color": "yellow",
-                "font-weight": "bold",
-                "font-size": "20px"
-            })
-            barchart_wrapper_args = {
-                "data": data.data,
-                "right_margin": 400,
-                "bar_color": "yellow"
-            }
-            az.remove_element("barchart", 1)
-            az.add_d3_visual('training_layout_cells', 2, {
-                "this_class": "barchart",
-                "html_path": "d3_visuals/barchart.html",
-                "wrapper_arguments": barchart_wrapper_args
-            })
-            az.style_d3_visual('barchart', 1, {
-                "width": "90%",
-                "height": "100%",
-                "margin-top": "250px",
-                "margin-left": "-40px"
-            })
-            az.rotate_element('barchart', 1, '45')
+    "name": "show_fetched_results",
+    "function": function show_fetched_results(data) {
+        az.animate_element('show_iris', 1, {
+            "type": "spin"
+        })
+        az.remove_element("iris_image", 1)
+        az.add_image("training_layout_cells", 1, {
+            "this_class": "iris_image",
+            "image_path": data['url']
+        })
+        az.style_image("iris_image", 1, {
+            "align": "center",
+            "width": "315px",
+            "height": "315px",
+            "border": "1px solid black",
+            "border-radius": "4px"
+        })
+        az.remove_element("flower_title", 1)
+        az.add_text("training_layout_cells", 1, {
+            "this_class": "flower_title",
+            "text": "Iris " + data['name'],
+        })
+        az.style_text("flower_title", 1, {
+            "align": "center",
+            "color": "yellow",
+            "font-weight": "bold",
+            "font-size": "20px"
+        })
+        barchart_wrapper_args = {
+            "data": data.data,
+            "right_margin": 400,
+            "bar_color": "yellow"
         }
-    })
-
+        az.remove_element("barchart", 1)
+        az.add_d3_visual('training_layout_cells', 2, {
+            "this_class": "barchart",
+            "html_path": "d3_visuals/barchart.html",
+            "wrapper_arguments": barchart_wrapper_args
+        })
+        az.style_d3_visual('barchart', 1, {
+            "width": "90%",
+            "height": "100%",
+            "margin-top": "250px",
+            "margin-left": "-40px"
+        })
+        az.rotate_element('barchart', 1, '45')
+    }
+})
 az.add_wrapped_function({
-        "name": "show_fetched_results_2",
-        "function": function show_fetched_results_2(data) {
-            az.animate_element('show_iris_2', 1, {
-                "type": "spin"
-            })
-            az.remove_element("iris_image_2", 1)
-            az.add_image("challenge_layout_cells", 1, {
-                "this_class": "iris_image_2",
-                "image_path": data['url']
-            })
-            az.style_image("iris_image_2", 1, {
-                "align": "center",
-                "width": "315px",
-                "height": "315px",
-                "border": "1px solid black",
-                "border-radius": "4px"
-            })
-            barchart_wrapper_args_2 = {
-                "data": data.data,
-                "right_margin": 600,
-                "bar_color": "#2ff72f"
-            }
-            az.remove_element("barchart_2", 1)
-            az.add_d3_visual('challenge_layout_cells', 2, {
-                "this_class": "barchart_2",
-                "html_path": "d3_visuals/barchart.html",
-                "wrapper_arguments": barchart_wrapper_args_2
-            })
-            az.style_d3_visual('barchart_2', 1, {
-                "width": "100%",
-                "height": "100%",
-                "margin-top": "130px",
-                "margin-left": "-20px"
-            })
-            az.rotate_element('barchart_2', 1, '45')
-            az.store_data('ask_button', 1, {
-                "key" : "stored_name",
-                "value" : data.name
-            })
-            az.store_data('ask_button', 1, {
-                "key" : "stored_iris",
-                "value" : JSON.stringify(data.data)
-            })
+    "name": "show_fetched_results_2",
+    "function": function show_fetched_results_2(data) {
+        az.animate_element('show_iris_2', 1, {
+            "type": "spin"
+        })
+        az.remove_element("iris_image_2", 1)
+        az.add_image("challenge_layout_cells", 1, {
+            "this_class": "iris_image_2",
+            "image_path": data['url']
+        })
+        az.style_image("iris_image_2", 1, {
+            "align": "center",
+            "width": "315px",
+            "height": "315px",
+            "border": "1px solid black",
+            "border-radius": "4px"
+        })
+        barchart_wrapper_args_2 = {
+            "data": data.data,
+            "right_margin": 600,
+            "bar_color": "#2ff72f"
         }
-    })
-
-
+        az.remove_element("barchart_2", 1)
+        az.add_d3_visual('challenge_layout_cells', 2, {
+            "this_class": "barchart_2",
+            "html_path": "d3_visuals/barchart.html",
+            "wrapper_arguments": barchart_wrapper_args_2
+        })
+        az.style_d3_visual('barchart_2', 1, {
+            "width": "100%",
+            "height": "100%",
+            "margin-top": "130px",
+            "margin-left": "-20px"
+        })
+        az.rotate_element('barchart_2', 1, '45')
+        az.store_data('ask_button', 1, {
+            "key": "stored_name",
+            "value": data.name
+        })
+        az.store_data('ask_button', 1, {
+            "key": "stored_iris",
+            "value": JSON.stringify(data.data)
+        })
+    }
+})
 az.add_wrapped_function({
-        "name" : "set_events_none",
-        "function" : function set_events_none() {
-            az.style_button('guess_drop', 1, {
-                "pointer-events" : "none",
-                "opacity" : 0.5
-            })
-            az.style_button('ask_button', 1, {
-                "pointer-events" : "none",
-                "opacity" : 0.5
-            })
-            az.style_button('show_button_2', 1, {
-                "pointer-events" : "none",
-                "opacity" : 0.5
-            })
+    "name": "set_events_none",
+    "function": function set_events_none() {
+        az.style_button('guess_drop', 1, {
+            "pointer-events": "none",
+            "opacity": 0.5
+        })
+        az.style_button('ask_button', 1, {
+            "pointer-events": "none",
+            "opacity": 0.5
+        })
+        az.style_button('show_button_2', 1, {
+            "pointer-events": "none",
+            "opacity": 0.5
+        })
+    }
+})
+az.add_wrapped_function({
+    "name": "ask_machine",
+    "function": function ask_machine() {
+        fetched_iris = az.fetch_data('ask_button', 1, {
+            "key": "stored_iris"
+        })
+        params = {
+            "guess_string": "[" + JSON.parse(fetched_iris).values + "]"
         }
-    })
-
-az.add_wrapped_function({
-        "name": "ask_machine",
-        "function": function ask_machine() {
-            fetched_iris = az.fetch_data('ask_button', 1, {
-                "key" : "stored_iris"
-            })
-            params = {
-                "guess_string": "[" + JSON.parse(fetched_iris).values + "]"
-            }
-            az.call_api({
-                "url": "http://localhost:9090/predict_flower",
-                "parameters": params,
-                "done": `
+        az.call_api({
+            "url": "http://localhost:9090/predict_flower",
+            "parameters": params,
+            "done": `
                 az.all_remove_element('report_text_2')
                 az.add_text('report_layout_cells', 2, {
                     "this_class" : "report_text_2",
@@ -155,10 +150,9 @@ az.add_wrapped_function({
                     "text-transform" : "capitalize"
                 })
                 `
-            })
-        }
+        })
+    }
 })
-
 az.hold_value.user_score = 0
 az.hold_value.machine_score = 0
 az.add_wrapped_function({
@@ -195,7 +189,6 @@ az.add_wrapped_function({
         })
     }
 })
-
 az.add_wrapped_function({
     "name": "reset_options",
     "function": function reset_options() {

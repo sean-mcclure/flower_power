@@ -12,8 +12,9 @@
 <script>
 
 create_azle(function() {
-    az.load_script('scripts/wrapped_functions.js')
-    az.load_font('Krub')
+
+            az.load_script('scripts/wrapped_functions.js')
+            az.load_font('Krub')
             az.style_body({
                 "font-family": "Krub",
                 "min-width": "1300px",
@@ -56,15 +57,15 @@ create_azle(function() {
                 "width": "70px",
                 "margin-top": "-4px"
             })
-    az.add_text('banner_layout_cells', 2, {
-        "this_class" : "app_title",
-        "text" : "FLOWER POWER"
-    })
-    az.style_text('app_title', 1, {
-        "color" : "white",
-        "font-size" : "30px"
-    })
-    az.style_layout('banner_layout_cells', 2, {
+            az.add_text('banner_layout_cells', 2, {
+                "this_class" : "app_title",
+                "text" : "FLOWER POWER"
+            })
+            az.style_text('app_title', 1, {
+                "color" : "white",
+                "font-size" : "30px"
+            })
+            az.style_layout('banner_layout_cells', 2, {
                 "halign": "left"
             })
             az.hold_value.nav_button_text = ['TRAINING', 'CHALLENGE', 'SCOREBOARD']
@@ -87,7 +88,7 @@ create_azle(function() {
                 "type" : "click",
                 "function" : "az.scroll_to('my_sections', " + scroll_index + ")"
             })
-        `
+            `
             })
             az.style_layout('banner_layout_cells', 3, {
                 "halign": "right"
@@ -195,7 +196,7 @@ create_azle(function() {
                 "pointer-events" : "auto",
                 "opacity" : 1
              })
-           `
+            `
             })
             az.add_layout('challenge_layout_cells', 3, {
                 "this_class": "guess_layout",
@@ -239,7 +240,7 @@ create_azle(function() {
                 "function": `
             az.remove_element('report_text', 1)
 
-az.add_text('report_layout_cells', 1, {
+            az.add_text('report_layout_cells', 1, {
                 "this_class" : "report_text",
                 "text" : az.grab_value('guess_drop', 1)
             })
@@ -312,9 +313,8 @@ az.add_text('report_layout_cells', 1, {
             })
             az.call_wrapped_function.calculate_score()
             az.call_wrapped_function.set_events_none()
-az.scroll_to('my_sections', 3)
-
-az.call_wrapped_function.reset_options()
+            az.scroll_to('my_sections', 3)
+            az.call_wrapped_function.reset_options()
             `
             })
             az.all_style_layout('guess_layout_cells', {
@@ -343,7 +343,6 @@ az.call_wrapped_function.reset_options()
                 "align": "center",
                 "font-size": "24px"
             })
-
             // on load
             az.delay_event({
                 "delay": 1000,
@@ -351,8 +350,9 @@ az.call_wrapped_function.reset_options()
             az.click_element('show_iris', 1)
             az.click_element('show_iris_2', 1)
             az.call_wrapped_function.set_events_none()
-        `
+            `
             })
+
 })
 
 </script>
