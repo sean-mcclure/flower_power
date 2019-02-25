@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src='https://azlejs.com/v2/azle.min.js'></script>
+</head>
+
+<body>
+</body>
+</html>
+
+<script>
+
+create_azle(function() {
+    az.load_script('scripts/wrapped_functions.js')
+    az.load_font('Krub')
+            az.style_body({
+                "font-family": "Krub",
+                "min-width": "1300px",
+                "max-width": "1300px",
+                "align": "center"
+            })
+            az.add_top_button({
+                "this_class": "scroll_to_top",
+                "text": "TOP",
+                "side": "right"
+            })
+            az.add_sections({
+                "this_class": "my_sections",
+                "sections": 4
+            })
+            az.all_style_sections('my_sections', {
+                "height": "500px"
+            })
+            az.style_sections('my_sections', 1, {
+                "height": "60px"
+            })
+            az.add_layout('my_sections', 1, {
+                "this_class": "banner_layout",
+                "row_class": "banner_layout_rows",
+                "cell_class": "banner_layout_cells",
+                "number_of_rows": 1,
+                "number_of_columns": 3
+            })
+            az.style_layout('banner_layout', 1, {
+                "height": "auto",
+                "width": "100%",
+                "column_widths" : ['5%','25%','70%'],
+                "border": 0
+            })
+            az.add_image('banner_layout_cells', 1, {
+                "this_class": "logo",
+                "image_path": "http://bit.ly/2GJWWWE"
+            })
+            az.style_image('logo', 1, {
+                "width": "70px",
+                "margin-top": "-4px"
+            })
+    az.add_text('banner_layout_cells', 2, {
+        "this_class" : "app_title",
+        "text" : "FLOWER POWER"
+    })
+    az.style_text('app_title', 1, {
+        "color" : "white",
+        "font-size" : "30px"
+    })
+    az.style_layout('banner_layout_cells', 2, {
+                "halign": "left"
+            })
+            az.hold_value.nav_button_text = ['TRAINING', 'CHALLENGE', 'SCOREBOARD']
+            az.call_multiple({
+                "iterations": 3,
+                "function": `
+            az.add_button('banner_layout_cells', 3, {
+                "this_class" : "nav_buttons",
+                "text" : az.hold_value.nav_button_text[index]
+            })
+            az.all_style_button('nav_buttons', {
+                "background" : "white",
+                "color" : "black",
+                "border" : "1px solid black",
+                "margin-top" : "-10px",
+                "margin-left" : "4px"
+            })
+            scroll_index = index + 2
+            az.add_event('nav_buttons', index+1, {
+                "type" : "click",
+                "function" : "az.scroll_to('my_sections', " + scroll_index + ")"
+            })
+        `
+            })
+            az.style_layout('banner_layout_cells', 3, {
+                "halign": "right"
+            })
+            // **** TRAINING SECTION ****
+            az.add_text('my_sections', 2, {
+                "this_class": "training_title",
+                "text": "TRAIN YOURSELF"
+            })
+            az.style_text('training_title', 1, {
+                "color": "white",
+                "align": "center",
+                "font-size": "24px"
+            })
+            az.add_layout('my_sections', 2, {
+                "this_class": "training_layout",
+                "row_class": "training_layout_rows",
+                "cell_class": "training_layout_cells",
+                "number_of_rows": 1,
+                "number_of_columns": 2
+            })
+            az.style_layout('training_layout', 1, {
+                "height": "100%",
+                "width": "90%",
+                "align": "center",
+                "table-layout": "fixed",
+                "margin-top": "-30px",
+                "border": 0
+            })
+            az.style_layout('training_layout_cells', 1, {
+                "valign": "top"
+            })
+            az.add_button('training_layout_cells', 1, {
+                "this_class": "show_iris",
+                "text": "SHOW IRIS"
+            })
+            az.style_button('show_iris', 1, {
+                "align": "center",
+                "background": "white",
+                "color": "black",
+                "margin-top": "70px",
+                "margin-bottom": "10px",
+                "border": "1px solid black"
+            })
+            az.add_event('show_iris', 1, {
+                "type": "click",
+                "function": "az.call_wrapped_function.fetch_random_iris('az.call_wrapped_function.show_fetched_results(data)')"
+            })
+            // **** CHALLENGE SECTION ****
+            az.add_text('my_sections', 3, {
+                "this_class": "flower_title_2",
+                "text": "CHALLENGE THE AI"
+            })
+            az.style_text('flower_title_2', 1, {
+                "color": "white",
+                "align": "center",
+                "font-size": "24px"
+            })
+            az.add_layout('my_sections', 3, {
+                "this_class": "challenge_layout",
+                "row_class": "challenge_layout_rows",
+                "cell_class": "challenge_layout_cells",
+                "number_of_rows": 1,
+                "number_of_columns": 4
+            })
+            az.style_layout('challenge_layout', 1, {
+                "height": "100%",
+                "width": "90%",
+                "align": "center",
+                "table-layout": "fixed",
+                "column_widths": ['30%', '30%', '30%', '10%'],
+                "border": 0
+            })
+            az.style_layout('challenge_layout_cells', 1, {
+                "valign": "top"
+            })
+            az.add_text('challenge_layout_cells', 1, {
+                "this_class": "step_title",
+                "text": "STEP 1"
+            })
+            az.style_text('step_title', 1, {
+                "align": "center",
+                "margin-top": "20px",
+                "margin-bottom": "-40px",
+                "color": "yellow",
+                "font-size": "24px"
+            })
+            az.add_button('challenge_layout_cells', 1, {
+                "this_class": "show_iris_2",
+                "text": "SHOW IRIS"
+            })
+            az.style_button('show_iris_2', 1, {
+                "align": "center",
+                "background": "white",
+                "color": "black",
+                "margin-top": "40px",
+                "margin-bottom": "10px",
+                "border": "1px solid darkslategrey"
+            })
+            az.add_event('show_iris_2', 1, {
+                "type": "click",
+                "function": `
+            az.call_wrapped_function.fetch_random_iris('az.call_wrapped_function.show_fetched_results_2(data)')
+            az.style_dropdown("guess_drop", 1, {
+                "pointer-events" : "auto",
+                "opacity" : 1
+             })
+           `
+            })
+            az.add_layout('challenge_layout_cells', 3, {
+                "this_class": "guess_layout",
+                "row_class": "guess_layout_rows",
+                "cell_class": "guess_layout_cells",
+                "number_of_rows": 4,
+                "number_of_columns": 1
+            })
+            az.style_layout('guess_layout', 1, {
+                "border": 0
+            })
+            az.add_text('guess_layout_cells', 1, {
+                "this_class": "step_title",
+                "text": "STEP 2"
+            })
+            az.style_text('step_title', 2, {
+                "align": "center",
+                "margin-top": "0px",
+                "margin-bottom": "-30px",
+                "color": "yellow",
+                "font-size": "24px"
+            })
+            az.add_dropdown('guess_layout_cells', 2, {
+                "this_class": "guess_drop",
+                "options": ['Iris Setosa', 'Iris Virginica', 'Iris Versicolor'],
+                "title": 'MAKE A GUESS...'
+            })
+            az.add_text('guess_layout_cells', 2, {
+                "this_class": "step_title",
+                "text": "STEP 3"
+            })
+            az.style_text('step_title', 3, {
+                "align": "center",
+                "margin-top": "30px",
+                "margin-bottom": "-30px",
+                "color": "yellow",
+                "font-size": "24px"
+            })
+            az.add_event('guess_drop', 1, {
+                "type": "change",
+                "function": `
+            az.remove_element('report_text', 1)
+
+az.add_text('report_layout_cells', 1, {
+                "this_class" : "report_text",
+                "text" : az.grab_value('guess_drop', 1)
+            })
+
+            az.style_text('report_text', 1, {
+                "color" : "yellow",
+                "align" : "center"
+            })
+            az.style_button('ask_button', 1, {
+                "pointer-events" : "auto",
+                "opacity" :1
+            })
+            `
+            })
+            az.add_button('guess_layout_cells', 3, {
+                "this_class": "ask_button",
+                "text": "ASK MACHINE"
+            })
+            az.style_button('ask_button', 1, {
+                "background": "hotpink",
+                "border": "1px solid darkslategrey"
+            })
+            az.add_event('ask_button', 1, {
+                "type": "click",
+                "function": `
+            az.call_wrapped_function.ask_machine();
+            az.animate_element('ask_button', 1, {'type' : 'spin'})
+            az.style_button('show_button_2', 1, {
+                "pointer-events" : "auto",
+                "opacity" :1
+            })
+            `
+            })
+            az.add_text('guess_layout_cells', 4, {
+                "this_class": "step_title",
+                "text": "STEP 4"
+            })
+            az.style_text('step_title', 4, {
+                "align": "center",
+                "margin-top": "0px",
+                "margin-bottom": "0px",
+                "color": "yellow",
+                "font-size": "24px"
+            })
+            az.add_button('guess_layout_cells', 4, {
+                "this_class": "show_button_2",
+                "text": "SHOW ACTUAL"
+            })
+            az.style_button("show_button_2", 1, {
+                "background": "#facea8",
+                "color": "black",
+                "border": "1px solid darkslategrey"
+            })
+            az.add_event('show_button_2', 1, {
+                "type": "click",
+                "function": `
+            az.animate_element('show_button_2', 1, {'type' : 'spin'})
+            fetched_name = az.fetch_data('ask_button', 1, {
+                "key" : "stored_name"
+            })
+            az.all_remove_element('report_text_3')
+            az.add_text('report_layout_cells', 3, {
+                "this_class" : "report_text_3",
+                "text" : "iris " + fetched_name
+            })
+            az.style_text('report_text_3', 1, {
+                "color" : "yellow",
+                "align" : "center",
+                "text-transform" : "capitalize"
+            })
+            az.call_wrapped_function.calculate_score()
+            az.call_wrapped_function.set_events_none()
+az.scroll_to('my_sections', 3)
+
+az.call_wrapped_function.reset_options()
+            `
+            })
+            az.all_style_layout('guess_layout_cells', {
+                "halign": "center"
+            })
+            az.add_layout('challenge_layout_cells', 4, {
+                "this_class": "report_layout",
+                "row_class": "report_layout_rows",
+                "cell_class": "report_layout_cells",
+                "number_of_rows": 3,
+                "number_of_columns": 1
+            })
+            az.style_layout('report_layout', 1, {
+                "align": "center",
+                "border": 2
+            })
+            az.all_style_layout('report_layout_cells', {
+                "border" : "2px solid white"
+            })
+            az.add_text('my_sections', 4, {
+                "this_class": "score_title",
+                "text": "SCOREBOARD"
+            })
+            az.style_text('score_title', 1, {
+                "color": "white",
+                "align": "center",
+                "font-size": "24px"
+            })
+
+            // on load
+            az.delay_event({
+                "delay": 1000,
+                "function": `
+            az.click_element('show_iris', 1)
+            az.click_element('show_iris_2', 1)
+            az.call_wrapped_function.set_events_none()
+        `
+            })
+})
+
+</script>
