@@ -53,28 +53,6 @@ az.style_text('app_title', 1, {
 az.style_layout('banner_layout_cells', 2, {
     "halign": "left"
 })
-az.hold_value.nav_button_text = ['TRAINING', 'CHALLENGE', 'SCOREBOARD']
-az.call_multiple({
-    "iterations": 3,
-    "function": function(elem, index) {
-        az.add_button('banner_layout_cells', 3, {
-            "this_class": "nav_buttons",
-            "text": az.hold_value.nav_button_text[index]
-        })
-        az.all_style_button('nav_buttons', {
-            "background": "white",
-            "color": "black",
-            "border": "1px solid black",
-            "margin-top": "-10px",
-            "margin-left": "4px"
-        })
-        scroll_index = index + 2
-        az.add_event('nav_buttons', index + 1, {
-            "type": "click",
-            "function": "az.scroll_to('my_sections', " + scroll_index + ")"
-        })
-    }
-})
 az.style_layout('banner_layout_cells', 3, {
     "halign": "right"
 })

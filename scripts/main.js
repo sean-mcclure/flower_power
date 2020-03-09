@@ -54,7 +54,7 @@ function show_fetched_results(data) {
     az.style_d3_visual('barchart', 1, {
         "width": "90%",
         "height": "100%",
-        "margin-top": "250px",
+        "margin-top": "200px",
         "margin-left": "-40px"
     })
     az.rotate_element('barchart', 1, '45')
@@ -90,7 +90,7 @@ function show_fetched_results_2(data) {
     az.style_d3_visual('barchart_2', 1, {
         "width": "100%",
         "height": "100%",
-        "margin-top": "130px",
+        "margin-top": "100px",
         "margin-left": "-20px"
     })
     az.rotate_element('barchart_2', 1, '45')
