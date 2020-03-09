@@ -4,7 +4,7 @@ function fetch_random_iris(call_function) {
         "url": "http://localhost:9090/get_random_flower",
         "parameters": params,
         "done": call_function,
-        "fail" : "alert('not connected to server')"
+        "fail": "alert('not connected to server')"
     })
     az.animate_element("show_button", 1, {
         "type": "spin",
@@ -130,22 +130,22 @@ function ask_machine() {
         "url": "http://localhost:9090/predict_flower",
         "parameters": params,
         "done": function(data) {
-                az.all_remove_element('report_text_2')
-                az.add_text('report_layout_cells', 2, {
-                    "this_class" : "report_text_2",
-                    "text" : data
-                })
-                az.style_text('report_text_2', 1, {
-                    "color" : "yellow",
-                    "align" : "center",
-                    "text-transform" : "capitalize"
-                })
-                }
+            az.all_remove_element('report_text_2')
+            az.add_text('report_layout_cells', 2, {
+                "this_class": "report_text_2",
+                "text": data
+            })
+            az.style_text('report_text_2', 1, {
+                "color": "yellow",
+                "align": "center",
+                "text-transform": "capitalize"
+            })
+        }
     })
 }
-
 az.hold_value.user_score = 0
 az.hold_value.machine_score = 0
+
 function calculate_score() {
     user_guess = az.grab_value('report_text_1', 1).toLowerCase()
     machine_guess = az.grab_value('report_text_2', 1).toLowerCase()
@@ -182,13 +182,13 @@ function reset_options() {
     az.delay_event({
         "delay": 2000,
         "function": function() {
-        az.choose_from_dropdown('guess_drop', 1, {
-            "option": "MAKE A GUESS..."
-        })
-        az.remove_element('report_text', 1)
-        az.remove_element('report_text_2', 1)
-        az.remove_element('report_text_3', 1)
-        set_events_none()
+            az.choose_from_dropdown('guess_drop', 1, {
+                "option": "MAKE A GUESS..."
+            })
+            az.remove_element('report_text', 1)
+            az.remove_element('report_text_2', 1)
+            az.remove_element('report_text_3', 1)
+            set_events_none()
         }
     })
 }

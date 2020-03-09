@@ -50,7 +50,7 @@ az.call_once_satisfied({
             "margin-top": "40px",
             "margin-bottom": "10px",
             "border": "1px solid darkslategrey",
-            "outline" : 0
+            "outline": 0
         })
         az.add_event('show_iris_2', 1, {
             "type": "click",
